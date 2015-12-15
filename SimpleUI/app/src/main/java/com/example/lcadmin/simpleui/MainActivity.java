@@ -11,15 +11,19 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText editText;
     private CheckBox hideCheckBox;
+    private ListView historyListView;
+
 /*
     Use SharedPreferences to store default values of inputText and checkBox checked status
  */
@@ -38,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     updates setText from constant string to something read from sharedPreferences
     demonstrate how to getString from sharedPreferences
  */
-//        editText.setText("1234");
         editText.setText(sharedPreferences.getString("inputText", ""));
 
         editText.setOnKeyListener(new View.OnKeyListener(){
@@ -66,6 +69,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         hideCheckBox.setChecked(sharedPreferences.getBoolean("hideCheckBox", false));
+
+        historyListView = (ListView) findViewById(R.id.historyListView);
+        setHistory();
+    }
+
+/*
+    demonstrates how to list string array to a ListView
+ */
+    private void setHistory() {
+        String[] data = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
+        historyListView.setAdapter(adapter);
     }
 
     public void submit(View view){
@@ -80,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 /*
     applies writeFile method from class Utils
  */
-        Utils.writeFile(this, "history.txt", text+"\n");
+        Utils.writeFile(this, "history.txt", text + "\n");
 /*
  if hideCheckBox is checked, editText content will be hided
   */

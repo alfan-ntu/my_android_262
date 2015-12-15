@@ -41,4 +41,11 @@
         android:layout_toRightOf="@+id/inputText"
         android:layout_toEndOf="@+id/inputText" />
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/historyListView"
+        android:layout_below="@+id/hideCheckBox"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
