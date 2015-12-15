@@ -16,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText editText;
     private CheckBox hideCheckBox;
     private ListView historyListView;
+    private Spinner storeInfoSpinner;
 
 /*
     Use SharedPreferences to store default values of inputText and checkBox checked status
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        storeInfoSpinner = (Spinner) findViewById(R.id.storeInfoSpinner);
         sharedPreferences = getSharedPreferences("settings", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
@@ -72,11 +75,18 @@ public class MainActivity extends AppCompatActivity {
 
         historyListView = (ListView) findViewById(R.id.historyListView);
         setHistory();
+        setStoreInfo();
     }
 
-/*
-    demonstrates how to list string array to a ListView
- */
+    private void setStoreInfo() {
+        String[] stores = getResources().getStringArray(R.array.storeInfo);
+        ArrayAdapter<String> storeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, stores);
+        storeInfoSpinner.setAdapter(storeAdapter);
+    }
+
+    /*
+        demonstrates how to list string array to a ListView
+     */
     private void setHistory() {
         String[] data = Utils.readFile(this, "history.txt").split("\n");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);

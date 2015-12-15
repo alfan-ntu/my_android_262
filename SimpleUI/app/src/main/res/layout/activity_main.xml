@@ -39,7 +39,8 @@
         android:checked="false"
         android:layout_alignBottom="@+id/button"
         android:layout_toRightOf="@+id/inputText"
-        android:layout_toEndOf="@+id/inputText" />
+        android:layout_toEndOf="@+id/inputText"
+        android:layout_marginLeft="20dp" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -47,5 +48,14 @@
         android:id="@+id/historyListView"
         android:layout_below="@+id/hideCheckBox"
         android:layout_centerHorizontal="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/storeInfoSpinner"
+        android:layout_above="@+id/historyListView"
+        android:layout_toEndOf="@+id/hideCheckBox"
+        android:layout_toLeftOf="@+id/button"
+        android:layout_marginLeft="20dp" />
 
 </RelativeLayout>

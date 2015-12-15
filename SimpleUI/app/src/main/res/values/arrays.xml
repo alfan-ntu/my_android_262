@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="storeInfo">
+        <item>TaiDa Store</item>
+        <item>YongHe Store</item>
+        <item>XiMen Store</item>
+        <item>TienMu Store</item>
+    </string-array>
+</resources>
