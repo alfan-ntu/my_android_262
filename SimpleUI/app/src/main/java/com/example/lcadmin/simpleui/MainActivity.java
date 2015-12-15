@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         editText = (EditText)findViewById(R.id.inputText);
 /*
     updates setText from constant string to something read from sharedPreferences
+    demonstrate how to getString from sharedPreferences
  */
 //        editText.setText("1234");
         editText.setText(sharedPreferences.getString("inputText", ""));
@@ -52,8 +54,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+/*
+    demonstrates how to use sharedReferences to store boolean value
+ */
         hideCheckBox = (CheckBox) findViewById(R.id.hideCheckBox);
-        hideCheckBox.setChecked(true);
+        hideCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                editor.putBoolean("hideCheckBox", isChecked);
+                editor.commit();
+            }
+        });
+        hideCheckBox.setChecked(sharedPreferences.getBoolean("hideCheckBox", false));
     }
 
     public void submit(View view){
@@ -61,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
 /*
     demonstrates how to use SharedPreferences editor to store values
+    method commit() of sharedReferences.edit() confirms the updates to the storage
  */
         editor.putString("inputText", text);
         editor.commit();
