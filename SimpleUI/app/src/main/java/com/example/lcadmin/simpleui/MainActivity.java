@@ -78,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("inputText", text);
         editor.commit();
 /*
+    applies writeFile method from class Utils
+ */
+        Utils.writeFile(this, "history.txt", text+"\n");
+/*
  if hideCheckBox is checked, editText content will be hided
   */
         if(hideCheckBox.isChecked()){
@@ -85,7 +89,9 @@ public class MainActivity extends AppCompatActivity {
             editText.setText(text);
         }
 
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+        String fileContent = Utils.readFile(this, "history.txt");
+        Toast.makeText(this, fileContent, Toast.LENGTH_LONG).show();;
+
         editText.setText("");
     }
 
