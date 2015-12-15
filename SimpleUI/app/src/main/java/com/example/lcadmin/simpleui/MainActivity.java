@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     demonstrates how to list string array to a ListView
  */
     private void setHistory() {
-        String[] data = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+        String[] data = Utils.readFile(this, "history.txt").split("\n");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
         historyListView.setAdapter(adapter);
     }
@@ -104,9 +104,7 @@ public class MainActivity extends AppCompatActivity {
             editText.setText(text);
         }
 
-        String fileContent = Utils.readFile(this, "history.txt");
-        Toast.makeText(this, fileContent, Toast.LENGTH_LONG).show();;
-
+        setHistory();
         editText.setText("");
     }
 
