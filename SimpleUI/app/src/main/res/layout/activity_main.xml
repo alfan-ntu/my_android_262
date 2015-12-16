@@ -14,7 +14,7 @@
         android:id="@+id/textView" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/inputText"
         android:layout_below="@+id/textView"
@@ -26,10 +26,11 @@
         android:layout_height="wrap_content"
         android:text="submit"
         android:id="@+id/button"
-        android:layout_alignTop="@+id/inputText"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="submit" />
+        android:onClick="submit"
+        android:layout_alignEnd="@+id/storeInfoSpinner"
+        android:layout_alignRight="@+id/storeInfoSpinner"
+        android:layout_alignTop="@+id/hideCheckBox"
+        android:layout_alignParentEnd="true" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -37,25 +38,36 @@
         android:text="hide"
         android:id="@+id/hideCheckBox"
         android:checked="false"
-        android:layout_alignBottom="@+id/button"
-        android:layout_toRightOf="@+id/inputText"
-        android:layout_toEndOf="@+id/inputText"
-        android:layout_marginLeft="20dp" />
+        android:layout_below="@+id/inputText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/historyListView"
-        android:layout_below="@+id/hideCheckBox"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/storeInfoSpinner"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/storeInfoSpinner"
-        android:layout_above="@+id/historyListView"
-        android:layout_toEndOf="@+id/hideCheckBox"
+        android:layout_below="@+id/button"
+        android:layout_marginLeft="149dp"
+        android:layout_marginStart="149dp"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="menu"
+        android:id="@+id/button8"
+        android:layout_above="@+id/storeInfoSpinner"
         android:layout_toLeftOf="@+id/button"
-        android:layout_marginLeft="20dp" />
+        android:layout_toStartOf="@+id/button"
+        android:onClick="goToMenu" />
 
 </RelativeLayout>
