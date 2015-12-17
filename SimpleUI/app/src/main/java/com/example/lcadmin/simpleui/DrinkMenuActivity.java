@@ -1,5 +1,6 @@
 package com.example.lcadmin.simpleui;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -36,10 +37,23 @@ public class DrinkMenuActivity extends AppCompatActivity {
         button.setText(String.valueOf(number));
     }
 
+/*
+    implement done method to return menu data to MainActivity
+  */
+    public void done(View view){
+        JSONArray jsonData = getData();
+        Intent data = new Intent();
+        data.putExtra("result", jsonData.toString());
+        setResult(RESULT_OK, data);
+        finish();
+    }
+
 /*   applied JSON data object format
-[{"name": "black tea", "l": 2, "m": 0},
- {"name": "milk tea", "l": 10, "m":3},
- {"name": "green tea", "l": 5, "m": 3}]
+[
+    {"name": "black tea", "l": 2, "m": 0},
+    {"name": "milk tea", "l": 10, "m":3},
+    {"name": "green tea", "l": 5, "m": 3}
+]
 * */
 
     public JSONArray getData(){

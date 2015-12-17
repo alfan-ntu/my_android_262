@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
  */
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+
+    private static final int REQUEST_CODE_MENU_ACTIVITY = 1;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,6 +150,16 @@ public class MainActivity extends AppCompatActivity {
     public void goToMenu(View view){
         Intent intent = new Intent();
         intent.setClass(this, DrinkMenuActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE_MENU_ACTIVITY);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_CODE_MENU_ACTIVITY){
+            if(resultCode == RESULT_OK){
+                String result = data.getStringExtra("result");
+                Log.d("debug", result);
+            }
+        }
     }
 }
