@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by lcadmin on 2015/12/16.
  * added a new activity class "DrinkMenuActivity"
@@ -38,21 +42,34 @@ public class DrinkMenuActivity extends AppCompatActivity {
  {"name": "green tea", "l": 5, "m": 3}]
 * */
 
-    public void getData(){
+    public JSONArray getData(){
         LinearLayout rootLinearLayout = (LinearLayout) findViewById(R.id.root);
         int count = rootLinearLayout.getChildCount();
+        JSONArray array = new JSONArray();
 
         for (int i=0 ; i<count ; i++ ){
             LinearLayout ll = (LinearLayout) rootLinearLayout.getChildAt(i);
 
-            TextView drinkNameTextView = (TextView) l.getChildAt(0);
+            TextView drinkNameTextView = (TextView) ll.getChildAt(0);
             Button lButton = (Button) ll.getChildAt(1);
             Button mButton = (Button) ll.getChildAt(2);
 
             String drinkName = drinkNameTextView.getText().toString();
-            int lNumber = Integer.parseInt(lButton.getText().toString();
+            int lNumber = Integer.parseInt(lButton.getText().toString());
             int mNumber = Integer.parseInt(mButton.getText().toString());
+/*
+    compose JSONArray using data got from LinearArray
+ */
+            try {
+                JSONObject object = new JSONObject();
+                object.put("name", drinkName);
+                object.put("l", lNumber);
+                object.put("m", mNumber);
+                array.put(object);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
-
+        return array;
     }
 }
