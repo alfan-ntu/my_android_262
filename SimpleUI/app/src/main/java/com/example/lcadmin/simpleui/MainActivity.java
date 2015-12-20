@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private String menuResult;
 
     private static final int REQUEST_CODE_MENU_ACTIVITY = 1;
+    private static final int REQUEST_TAKE_PHOTO = 2;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -231,8 +233,11 @@ public class MainActivity extends AppCompatActivity {
 
         if(id == R.id.action_take_photo){
             Toast.makeText(this, "taking photo", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent();
+            intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, REQUEST_TAKE_PHOTO);
+            Log.d("alfan debug", MediaStore.ACTION_IMAGE_CAPTURE);
         }
-
         return super.onOptionsItemSelected(item);
     }
 
