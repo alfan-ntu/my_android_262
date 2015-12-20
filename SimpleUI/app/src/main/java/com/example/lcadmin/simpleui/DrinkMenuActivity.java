@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -42,6 +43,8 @@ public class DrinkMenuActivity extends AppCompatActivity {
   */
     public void done(View view){
         JSONArray jsonData = getData();
+        Log.d("al_fan debug:", "getData done=>"+jsonData.toString());
+
         Intent data = new Intent();
         data.putExtra("result", jsonData.toString());
         setResult(RESULT_OK, data);
@@ -51,7 +54,7 @@ public class DrinkMenuActivity extends AppCompatActivity {
 /*   applied JSON data object format
 [
     {"name": "black tea", "l": 2, "m": 0},
-    {"name": "milk tea", "l": 10, "m":3},
+    {"name": "milk tea", "l": 10, "m"getData:3},
     {"name": "green tea", "l": 5, "m": 3}
 ]
 * */
@@ -59,9 +62,10 @@ public class DrinkMenuActivity extends AppCompatActivity {
     public JSONArray getData(){
         LinearLayout rootLinearLayout = (LinearLayout) findViewById(R.id.root);
         int count = rootLinearLayout.getChildCount();
+
         JSONArray array = new JSONArray();
 
-        for (int i=0 ; i<count ; i++ ){
+        for (int i=0 ; i < count - 1 ; i++ ){
             LinearLayout ll = (LinearLayout) rootLinearLayout.getChildAt(i);
 
             TextView drinkNameTextView = (TextView) ll.getChildAt(0);

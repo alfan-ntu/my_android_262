@@ -144,7 +144,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-/*
+
+/*        data.putExtra("result", jsonData.toString());
+
     demonstrates how to implement goToMenu method
  */
     public void goToMenu(View view){
@@ -158,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == REQUEST_CODE_MENU_ACTIVITY){
             if(resultCode == RESULT_OK){
                 String result = data.getStringExtra("result");
-                Log.d("debug", result);
+                Log.d("al_fan debug", result);
             }
         }
     }
