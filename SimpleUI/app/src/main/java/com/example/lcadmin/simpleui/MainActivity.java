@@ -22,6 +22,9 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,8 +52,17 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_MENU_ACTIVITY = 1;
 
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+/*
+    demonstrates how to include class Parse to store data to 'Parse' database
+ */
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this);
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar1");
+        testObject.saveInBackground();
 
         storeInfoSpinner = (Spinner) findViewById(R.id.storeInfoSpinner);
         sharedPreferences = getSharedPreferences("settings", Context.MODE_PRIVATE);
