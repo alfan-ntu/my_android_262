@@ -21,6 +21,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText editText;
@@ -33,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
  */
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+
+    private String menuResult;
 
     private static final int REQUEST_CODE_MENU_ACTIVITY = 1;
 
@@ -97,6 +103,11 @@ public class MainActivity extends AppCompatActivity {
         historyListView.setAdapter(adapter);
     }
 
+/*
+    "note" : this is a note
+    "menu" : [....]
+*/
+
     public void submit(View view){
         String text = editText.getText().toString();
 
@@ -109,7 +120,16 @@ public class MainActivity extends AppCompatActivity {
 /*
     applies writeFile method from class Utils
  */
-        Utils.writeFile(this, "history.txt", text + "\n");
+    try {
+        JSONObject orderData = new JSONObject();
+        JSONArray array = new JSONArray(menuResult);
+        orderData.put("note", text);
+        orderData.put("menu", array);
+        Utils.writeFile(this, "history.txt", orderData.toString());
+    } catch (JSONException e){
+        e.printStackTrace();
+    }
+
 /*
  if hideCheckBox is checked, editText content will be hided
   */
@@ -145,8 +165,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-/*        data.putExtra("result", jsonData.toString());
-
+/*
     demonstrates how to implement goToMenu method
  */
     public void goToMenu(View view){
@@ -159,8 +178,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_CODE_MENU_ACTIVITY){
             if(resultCode == RESULT_OK){
-                String result = data.getStringExtra("result");
-                Log.d("al_fan debug", result);
+                menuResult = data.getStringExtra("result");
             }
         }
     }
