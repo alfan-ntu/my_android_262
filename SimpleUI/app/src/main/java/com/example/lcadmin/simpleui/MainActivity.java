@@ -3,6 +3,8 @@ package com.example.lcadmin.simpleui;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox hideCheckBox;
     private ListView historyListView;
     private Spinner storeInfoSpinner;
+    private ImageView photoImageView;
 
 /*
     Use SharedPreferences to store default values of inputText and checkBox checked status
@@ -65,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         storeInfoSpinner = (Spinner) findViewById(R.id.storeInfoSpinner);
         sharedPreferences = getSharedPreferences("settings", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
+
+        photoImageView = (ImageView) findViewById(R.id.photo);
 
         editText = (EditText)findViewById(R.id.inputText);
 /*
@@ -233,18 +239,22 @@ public class MainActivity extends AppCompatActivity {
 
         if(id == R.id.action_take_photo){
             Toast.makeText(this, "taking photo", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent();
-            intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, REQUEST_TAKE_PHOTO);
-            Log.d("alfan debug", MediaStore.ACTION_IMAGE_CAPTURE);
-        }
+            goToCamera();
+       }
         return super.onOptionsItemSelected(item);
     }
 
+    private void goToCamera() {
+        Intent intent = new Intent();
+        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Utils.getPhotoUri());
+        startActivityForResult(intent, REQUEST_TAKE_PHOTO);
+    }
 
-/*
-    demonstrates how to implement goToMenu method
- */
+
+    /*
+        demonstrates how to implement goToMenu method
+     */
     public void goToMenu(View view){
         Intent intent = new Intent();
         intent.setClass(this, DrinkMenuActivity.class);
@@ -256,6 +266,11 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == REQUEST_CODE_MENU_ACTIVITY){
             if(resultCode == RESULT_OK){
                 menuResult = data.getStringExtra("result");
+            }
+        } else if (requestCode == REQUEST_TAKE_PHOTO){
+            if(resultCode == RESULT_OK){
+                Uri uri = Utils.getPhotoUri();
+                photoImageView.setImageURI(uri);
             }
         }
     }
