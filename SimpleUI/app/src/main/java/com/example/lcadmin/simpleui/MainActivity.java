@@ -229,6 +229,10 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if(id == R.id.action_take_photo){
+            Toast.makeText(this, "taking photo", Toast.LENGTH_LONG).show();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
