@@ -46,6 +46,7 @@ public class Utils {
         if (dir.exists() == false){
             dir.mkdir();
         }
+
         File file = new File(dir, "simpleui_photo.png");
         return Uri.fromFile(file);
     }
