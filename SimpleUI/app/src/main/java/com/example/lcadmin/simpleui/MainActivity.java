@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private String menuResult;
     private boolean hasPhoto = false;
+    private List<ParseObject> queryResult;
 
     private static final int REQUEST_CODE_MENU_ACTIVITY = 1;
     private static final int REQUEST_TAKE_PHOTO = 2;
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         historyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                    @Override
                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                       goToOrderDetail();
+                       goToOrderDetail(position);
 
                    }
                }
@@ -125,9 +126,11 @@ public class MainActivity extends AppCompatActivity {
         setStoreInfo();
     }
 
-    private void goToOrderDetail() {
+    private void goToOrderDetail(int position) {
         Intent intent = new Intent();
         intent.setClass(this, OrderDetailActivity.class);
+        ParseObject object = queryResult.get(position);
+        intent.putExtra("note", object.getString("note"));
         startActivity(intent);
     }
 
@@ -163,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
+                queryResult = objects;
                 List<Map<String, String>> data = new ArrayList<>();
                 for (int i = 0; i < objects.size(); i++) {
                     ParseObject object = objects.get(i);
