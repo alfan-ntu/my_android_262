@@ -21,6 +21,10 @@
             android:name="com.parse.CLIENT_KEY"
             android:value="jSSanTxAG1bDnXKw0ii81dZDQl2VXRYdVbV7tPfl" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA80l9cTYMZBs_Ko-fERF9SKWATtm90GhE" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

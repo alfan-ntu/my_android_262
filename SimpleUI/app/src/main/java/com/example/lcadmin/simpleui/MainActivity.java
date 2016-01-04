@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
 
     private String menuResult;
+    private boolean hasPhoto = false;
 
     private static final int REQUEST_CODE_MENU_ACTIVITY = 1;
     private static final int REQUEST_TAKE_PHOTO = 2;
@@ -196,6 +198,14 @@ public class MainActivity extends AppCompatActivity {
         ParseObject orderObject = new ParseObject("Order");
         orderObject.put("note", text);
         orderObject.put("menu", array);
+        if (hasPhoto == true) {
+            Uri uri = Utils.getPhotoUri();
+            Log.d("SimpleUI", uri.toString());
+
+            ParseFile parseFile = new ParseFile("photo.png", Utils.uriToBytes(this, uri));
+            orderObject.put("photo", parseFile);
+            hasPhoto = false;
+        }
         orderObject.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -274,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK){
                 Uri uri = Utils.getPhotoUri();
                 photoImageView.setImageURI(uri);
+                hasPhoto = true;
             }
         }
     }
