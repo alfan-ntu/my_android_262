@@ -1,5 +1,6 @@
 package com.example.lcadmin.simpleui;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
+    private ProgressDialog progressDialog;
     private String menuResult;
     private boolean hasPhoto = false;
 
@@ -108,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         hideCheckBox.setChecked(sharedPreferences.getBoolean("hideCheckBox", false));
 
         historyListView = (ListView) findViewById(R.id.historyListView);
+        progressDialog = new ProgressDialog(this);
         setHistory();
         setStoreInfo();
     }
@@ -175,8 +178,9 @@ public class MainActivity extends AppCompatActivity {
 */
 
     public void submit(View view){
+        progressDialog.setTitle("Loading....");
+        progressDialog.show();
         String text = editText.getText().toString();
-
 /*
     demonstrates how to use SharedPreferences editor to store values
     method commit() of sharedReferences.edit() confirms the updates to the storage
@@ -209,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
         orderObject.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
+                progressDialog.dismiss();
                 if (e == null){
                     Toast.makeText(MainActivity.this, "[SaveCallback] OK", Toast.LENGTH_LONG).show();
                 } else {
