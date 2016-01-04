@@ -7,20 +7,18 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".SimpleUIApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".SimpleUIApplication">
-
+        android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.parse.APPLICATION_ID"
             android:value="mzOU0losuCYejoHkk6yMYBqKtkiMoTfyIs3GS9bp" />
         <meta-data
             android:name="com.parse.CLIENT_KEY"
             android:value="jSSanTxAG1bDnXKw0ii81dZDQl2VXRYdVbV7tPfl" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA80l9cTYMZBs_Ko-fERF9SKWATtm90GhE" />
@@ -35,11 +33,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".DrinkMenuActivity"
             android:label="@string/title_activity_drink_menu"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".OrderDetailActivity"
+            android:label="@string/title_activity_order_detail"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>
