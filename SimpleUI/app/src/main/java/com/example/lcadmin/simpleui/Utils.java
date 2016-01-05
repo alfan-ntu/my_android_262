@@ -134,4 +134,12 @@ public class Utils {
         }
         return null;
     }
+
+
+    public static double[] addressToLatLng(String address){
+        String url = Utils.getGeoCodingUrl(address);
+        byte[] bytes = Utils.urlToBytes(url);
+        String result = new String(bytes);
+        return Utils.getLatLngFromJsonString(result);
+    }
 }

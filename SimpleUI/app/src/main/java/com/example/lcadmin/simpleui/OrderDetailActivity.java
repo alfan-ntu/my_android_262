@@ -1,5 +1,6 @@
 package com.example.lcadmin.simpleui;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -24,21 +25,19 @@ public class OrderDetailActivity extends AppCompatActivity {
         Log.d("SimpleUI debug", storeInfo);
 
         address = storeInfo.split(",")[1];
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-//                String url =
-//                        "https://maps.googleapis.com/maps/api/geocode/json?address=taipei101";
-                String url = Utils.getGeoCodingUrl(address);
-                byte[] bytes = Utils.urlToBytes(url);
-                String result = new String(bytes);
-                double[] latLng = Utils.getLatLngFromJsonString(result);
 
-                Log.d("SimpleUI debug", result);
-                Log.d("SimpleUI debug", latLng[0] + "," + latLng[1]);
+        AsyncTask task = new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
+                Utils.addressToLatLng(address);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
 
             }
-        });
-        thread.start();
+        };
+        task.execute();
     }
 }
