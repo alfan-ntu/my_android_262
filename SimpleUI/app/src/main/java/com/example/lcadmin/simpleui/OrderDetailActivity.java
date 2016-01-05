@@ -14,19 +14,20 @@ public class OrderDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         String note = getIntent().getStringExtra("note");
         Log.d("SimpleUI debug", note);
-    }
 
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url =
+                        "https://maps.googleapis.com/maps/api/geocode/json?address=taipei101";
+                byte[] bytes = Utils.urlToBytes(url);
+                String result = new String(bytes);
+                Log.d("SimpleUI debug", result);
+            }
+        });
+        thread.start();
+    }
 }
