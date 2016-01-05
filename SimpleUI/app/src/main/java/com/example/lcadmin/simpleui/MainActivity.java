@@ -172,13 +172,14 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < objects.size(); i++) {
                     ParseObject object = objects.get(i);
                     String note = object.getString("note");
+                    String storeInfo = object.getString("storeInfo");
                     JSONArray array = object.getJSONArray("menu");
 
                     Map<String, String> item = new HashMap<String, String>();
 
                     item.put("note", note);
                     item.put("drinkNum", "15");
-                    item.put("storeInfo", "NTU Store");
+                    item.put("storeInfo", storeInfo);
 
                     data.add(item);
                 }
