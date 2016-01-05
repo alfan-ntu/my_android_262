@@ -119,7 +119,7 @@ public class Utils {
         String center = latLng[0]+","+latLng[1];
         String url =
                 "https://maps.googleapis.com/maps/api/staticmap?center="+
-                        center+"&zoom="+zoom+"&size=640x400";
+                        center+"&zoom="+zoom+"&size=1024x768";
         return url;
     }
 
