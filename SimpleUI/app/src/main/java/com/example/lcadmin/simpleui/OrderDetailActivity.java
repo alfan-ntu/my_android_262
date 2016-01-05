@@ -10,13 +10,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class OrderDetailActivity extends AppCompatActivity {
 
     private TextView addressTextView;
     private ImageView staticMapImage;
+    private Switch mapSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,17 @@ public class OrderDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_detail);
         addressTextView = (TextView) findViewById(R.id.address);
         staticMapImage = (ImageView) findViewById(R.id.staticMapImage);
+        mapSwitch = (Switch) findViewById(R.id.mapSwitch);
+        mapSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    staticMapImage.setVisibility(View.GONE);
+                } else {
+                    staticMapImage.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         String note = getIntent().getStringExtra("note");
         String storeInfo = getIntent().getStringExtra("storeInfo");
