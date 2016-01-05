@@ -16,12 +16,18 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+
 public class OrderDetailActivity extends AppCompatActivity {
 
     private TextView addressTextView;
     private ImageView staticMapImage;
     private Switch mapSwitch;
     private WebView staticMapWeb;
+
+    private GoogleMap googleMap;
+    private SupportMapFragment mapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,10 @@ public class OrderDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mapFragment =(SupportMapFragment)
+                getSupportFragmentManager().findFragmentById(R.id.googleMap);
+        googleMap = mapFragment.getMap();
 
         String note = getIntent().getStringExtra("note");
         String storeInfo = getIntent().getStringExtra("storeInfo");
