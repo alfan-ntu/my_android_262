@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -20,6 +21,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     private TextView addressTextView;
     private ImageView staticMapImage;
     private Switch mapSwitch;
+    private WebView staticMapWeb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +29,19 @@ public class OrderDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_detail);
         addressTextView = (TextView) findViewById(R.id.address);
         staticMapImage = (ImageView) findViewById(R.id.staticMapImage);
+        staticMapWeb = (WebView) findViewById(R.id.webView);
+        staticMapWeb.setVisibility(View.GONE);
+
         mapSwitch = (Switch) findViewById(R.id.mapSwitch);
         mapSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     staticMapImage.setVisibility(View.GONE);
+                    staticMapWeb.setVisibility(View.VISIBLE);
                 } else {
                     staticMapImage.setVisibility(View.VISIBLE);
+                    staticMapWeb.setVisibility(View.GONE);
                 }
             }
         });
@@ -54,16 +61,21 @@ public class OrderDetailActivity extends AppCompatActivity {
 
 
     private class GeoCodingTask extends AsyncTask<String, Void, byte[]> {
+
+        private String url;
+
         @Override
         protected byte[] doInBackground(String... params) {
             String address = params[0];
             double[] latLng = Utils.addressToLatLng(address);
-            String url = Utils.getStaticMapUrl(latLng, 17);
+            url = Utils.getStaticMapUrl(latLng, 17);
             return Utils.urlToBytes(url);
         }
 
         @Override
         protected void onPostExecute(byte[] bytes) {
+
+            staticMapWeb.loadUrl(url);
             Bitmap bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             staticMapImage.setImageBitmap(bm);
         }

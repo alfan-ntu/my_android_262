@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/staticMapImage"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/mapSwitch"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:src="@mipmap/ic_launcher" />
@@ -37,4 +37,13 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:checked="false" />
+
+    <WebView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/webView"
+        android:layout_below="@+id/mapSwitch"
+        android:layout_alignBottom="@+id/staticMapImage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
