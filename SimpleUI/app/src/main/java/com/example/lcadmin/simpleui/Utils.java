@@ -4,6 +4,9 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Environment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,9 +14,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 
 /**
  * Created by lcadmin on 2015/12/15.
@@ -90,6 +95,41 @@ public class Utils {
         }catch (MalformedURLException e){
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+/*
+      composed geocoding url with address to lookup appended
+ */
+    public static String getGeoCodingUrl(String address){
+        try {
+            address = URLEncoder.encode(address, "utf-8");
+        } catch (UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+        String url =
+                "https://maps.googleapis.com/maps/api/geocode/json?address="
+                    + address;
+
+        return url;
+    }
+
+
+    public static double[] getLatLngFromJsonString(String jsonString){
+        try{
+            JSONObject object = new JSONObject(jsonString);
+
+            JSONObject locationObject = object.getJSONArray("results")
+                    .getJSONObject(0)
+                    .getJSONObject("geometry")
+                    .getJSONObject("location");
+
+            double lat = locationObject.getDouble("lat");
+            double lng = locationObject.getDouble("lng");
+
+            return new double[]{lat, lng};
+        } catch (JSONException e){
             e.printStackTrace();
         }
         return null;
