@@ -16,7 +16,10 @@ public class OrderDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_detail);
 
         String note = getIntent().getStringExtra("note");
+        String storeInfo = getIntent().getStringExtra("storeInfo");
+
         Log.d("SimpleUI debug", note);
+        Log.d("SimpleUI debug", storeInfo);
 
         Thread thread = new Thread(new Runnable() {
             @Override

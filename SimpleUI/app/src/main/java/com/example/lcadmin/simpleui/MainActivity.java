@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setClass(this, OrderDetailActivity.class);
         ParseObject object = queryResult.get(position);
+        intent.putExtra("storeInfo", object.getString("storeInfo"));
         intent.putExtra("note", object.getString("note"));
         startActivity(intent);
     }
@@ -221,6 +222,10 @@ public class MainActivity extends AppCompatActivity {
 
         ParseObject orderObject = new ParseObject("Order");
         orderObject.put("note", text);
+/*
+    store storeInfo as a parse object to parse database
+ */
+        orderObject.put("storeInfo", storeInfoSpinner.getSelectedItem());
         orderObject.put("menu", array);
         if (hasPhoto == true) {
             Uri uri = Utils.getPhotoUri();
