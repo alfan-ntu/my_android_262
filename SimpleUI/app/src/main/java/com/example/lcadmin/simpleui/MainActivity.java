@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -28,6 +29,11 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -63,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
     private String menuResult;
     private boolean hasPhoto = false;
     private List<ParseObject> queryResult;
+
+    private CallbackManager callbackManager;
+    private LoginButton loginButton;
 
     private static final int REQUEST_CODE_MENU_ACTIVITY = 1;
     private static final int REQUEST_TAKE_PHOTO = 2;
@@ -124,6 +133,28 @@ public class MainActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         setHistory();
         setStoreInfo();
+        setupFacebook();
+    }
+
+    private void setupFacebook() {
+        callbackManager = CallbackManager.Factory.create();
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>(){
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                
+            }
+        });
     }
 
     private void goToOrderDetail(int position) {
