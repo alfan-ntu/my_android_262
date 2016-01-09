@@ -21,6 +21,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class OrderDetailActivity extends AppCompatActivity {
 
@@ -101,6 +102,13 @@ public class OrderDetailActivity extends AppCompatActivity {
 
             LatLng storeAddress = new LatLng(latLng[0], latLng[1]);
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(storeAddress, 20));
+
+            String[] storeInfo = getIntent().getStringExtra("storeInfo").split(",");
+            googleMap.addMarker(new MarkerOptions()
+                .title(storeInfo[0])
+                .snippet(storeInfo[1])
+                .position(storeAddress)
+            );
         }
     }
 }
