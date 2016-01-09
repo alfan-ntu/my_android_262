@@ -16,9 +16,11 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
 public class OrderDetailActivity extends AppCompatActivity {
 
@@ -80,11 +82,12 @@ public class OrderDetailActivity extends AppCompatActivity {
     private class GeoCodingTask extends AsyncTask<String, Void, byte[]> {
 
         private String url;
+        private double[] latLng;
 
         @Override
         protected byte[] doInBackground(String... params) {
             String address = params[0];
-            double[] latLng = Utils.addressToLatLng(address);
+            latLng = Utils.addressToLatLng(address);
             url = Utils.getStaticMapUrl(latLng, 17);
             return Utils.urlToBytes(url);
         }
@@ -95,6 +98,9 @@ public class OrderDetailActivity extends AppCompatActivity {
             staticMapWeb.loadUrl(url);
             Bitmap bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             staticMapImage.setImageBitmap(bm);
+
+            LatLng storeAddress = new LatLng(latLng[0], latLng[1]);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(storeAddress, 20));
         }
     }
 }
