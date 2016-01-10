@@ -280,11 +280,14 @@ public class MainActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 progressDialog.dismiss();
                 if (e == null){
-                    Toast.makeText(MainActivity.this, "[SaveCallback] OK", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,
+                            "[SaveCallback] OK", Toast.LENGTH_LONG).show();
                 } else {
                     e.printStackTrace();
-                    Toast.makeText(MainActivity.this, "[SaveCallback] Failed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,
+                            "[SaveCallback] Failed", Toast.LENGTH_LONG).show();
                 }
+                setHistory();
             }
         });
     } catch (JSONException e){
@@ -298,9 +301,6 @@ public class MainActivity extends AppCompatActivity {
             text = "********";
             editText.setText(text);
         }
-
-        setHistory();
-        editText.setText("");
     }
 
     @Override
