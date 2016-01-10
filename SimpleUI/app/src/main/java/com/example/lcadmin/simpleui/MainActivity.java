@@ -29,11 +29,14 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+/*
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+*/
+
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -70,8 +73,10 @@ public class MainActivity extends AppCompatActivity {
     private boolean hasPhoto = false;
     private List<ParseObject> queryResult;
 
+/*
     private CallbackManager callbackManager;
     private LoginButton loginButton;
+*/
 
     private static final int REQUEST_CODE_MENU_ACTIVITY = 1;
     private static final int REQUEST_TAKE_PHOTO = 2;
@@ -133,9 +138,10 @@ public class MainActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         setHistory();
         setStoreInfo();
-        setupFacebook();
+//        setupFacebook();
     }
 
+/*
     private void setupFacebook() {
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
@@ -156,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+*/
+
 
     private void goToOrderDetail(int position) {
         Intent intent = new Intent();
