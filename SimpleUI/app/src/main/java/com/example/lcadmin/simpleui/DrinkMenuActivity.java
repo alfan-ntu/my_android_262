@@ -21,6 +21,10 @@ import org.json.JSONObject;
  * added a new activity class "DrinkMenuActivity"
  */
 public class DrinkMenuActivity extends AppCompatActivity {
+
+    private int count;
+    private LinearLayout rootLinearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +32,9 @@ public class DrinkMenuActivity extends AppCompatActivity {
     applies layout resource activity_drink_menu.xml
  */
         setContentView(R.layout.activity_drink_menu);
+
+        rootLinearLayout = (LinearLayout) findViewById(R.id.root);
+        count = rootLinearLayout.getChildCount();
 
     }
 
@@ -49,17 +56,25 @@ public class DrinkMenuActivity extends AppCompatActivity {
         finish();
     }
 
+/*
+    implement cancel method to reset order data
+*/
+    public void cancel(View view){
+        setResult(RESULT_CANCELED);
+        finish();
+    }
+
+
 /*   applied JSON data object format
 [
-    {"name": "black tea", "l": 2, "m": 0},
-    {"name": "milk tea", "l": 10, "m"getData:3},
-    {"name": "green tea", "l": 5, "m": 3}
+    {"name": "black tea", "l": 2, "m": 0, "s": 0},
+    {"name": "milk tea", "l": 10, "m": 3, "s": 1},
+    {"name": "green tea", "l": 5, "m": 3, "s": 2}
 ]
 * */
 
     public JSONArray getData(){
-        LinearLayout rootLinearLayout = (LinearLayout) findViewById(R.id.root);
-        int count = rootLinearLayout.getChildCount();
+        Log.d("SimpleUI child count", String.valueOf(count));
 
         JSONArray array = new JSONArray();
 
@@ -69,10 +84,15 @@ public class DrinkMenuActivity extends AppCompatActivity {
             TextView drinkNameTextView = (TextView) ll.getChildAt(0);
             Button lButton = (Button) ll.getChildAt(1);
             Button mButton = (Button) ll.getChildAt(2);
+            Button sButton = (Button) ll.getChildAt(3);
 
             String drinkName = drinkNameTextView.getText().toString();
             int lNumber = Integer.parseInt(lButton.getText().toString());
             int mNumber = Integer.parseInt(mButton.getText().toString());
+            int sNumber = Integer.parseInt(sButton.getText().toString());
+
+            Log.d("SimpleUI-item_quantity", drinkName+" l "+String.valueOf(lNumber)
+                    +" m "+String.valueOf(mNumber)+" s "+String.valueOf(sNumber));
 /*
     compose JSONArray using data got from LinearArray
  */
@@ -81,6 +101,7 @@ public class DrinkMenuActivity extends AppCompatActivity {
                 object.put("name", drinkName);
                 object.put("l", lNumber);
                 object.put("m", mNumber);
+                object.put("s", sNumber);
                 array.put(object);
             } catch (JSONException e) {
                 e.printStackTrace();

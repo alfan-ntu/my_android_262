@@ -35,6 +35,15 @@
             android:id="@+id/button3"
             android:layout_weight="1"
             android:onClick="add" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/button11"
+            android:layout_weight="1"
+            android:onClick="add"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -63,6 +72,14 @@
             android:layout_height="wrap_content"
             android:text="0"
             android:id="@+id/button5"
+            android:layout_weight="1"
+            android:onClick="add" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/button12"
             android:layout_weight="1"
             android:onClick="add" />
 
@@ -96,6 +113,15 @@
             android:id="@+id/button7"
             android:layout_weight="1"
             android:onClick="add" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/button13"
+            android:layout_weight="1"
+            android:onClick="add"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -107,9 +133,10 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="New Button"
+            android:text="CANCEL"
             android:id="@+id/button9"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="cancel" />
 
         <Button
             android:layout_width="0dp"

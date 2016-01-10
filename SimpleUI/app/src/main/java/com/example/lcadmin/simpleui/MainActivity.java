@@ -212,12 +212,47 @@ public class MainActivity extends AppCompatActivity {
                     ParseObject object = objects.get(i);
                     String note = object.getString("note");
                     String storeInfo = object.getString("storeInfo");
+
                     JSONArray array = object.getJSONArray("menu");
+/*
+ extract order details from JSONArray array and store it to a JSONObject
+ Author : Maoyi Fan
+ */
+                    int lQuantity=0,
+                        mQuantity=0,
+                        sQuantity=0,
+                        orderQuantity=0,
+                        totalQuantity=0;
+
+                    String drinkName="";
+
+                    for (int n=0; n < array.length(); n++) {
+                        JSONObject orderObject = null;
+                        orderQuantity = 0;
+                        try {
+                            orderObject = array.getJSONObject(n);
+                            drinkName = orderObject.getString("name");
+                            lQuantity = orderObject.getInt("l");
+                            mQuantity = orderObject.getInt("m");
+                            sQuantity = orderObject.getInt("s");
+                            orderQuantity = lQuantity + mQuantity + sQuantity;
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                        totalQuantity += orderQuantity;
+
+                        Log.d("SimpleUI-drink", drinkName);
+                        Log.d("SimpleUI-lQ", String.valueOf(lQuantity));
+                        Log.d("SimpleUI-mQ", String.valueOf(mQuantity));
+                        Log.d("SimpleUI-sQ", String.valueOf(sQuantity)+"\n");
+                    }
+
+                    Log.d("SimpleUI-totQ", String.valueOf(totalQuantity));
 
                     Map<String, String> item = new HashMap<String, String>();
 
                     item.put("note", note);
-                    item.put("drinkNum", "15");
+                    item.put("drinkNum", String.valueOf(totalQuantity));
                     item.put("storeInfo", storeInfo);
 
                     data.add(item);
