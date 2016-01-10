@@ -264,6 +264,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    public void studentIDsubmit(View view){
+        Toast.makeText(this, "studentIDsubmit executed",Toast.LENGTH_LONG).show();
+
+        ParseObject studentIDObject = new ParseObject("HomeworkParse");
+        studentIDObject.put("sid", "Maoyi Fan");
+        studentIDObject.put("email", "maoyi_fan@yahoo.com.tw");
+
+        studentIDObject.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null){
+                    Toast.makeText(MainActivity.this,
+                            "Save Student ID OK", Toast.LENGTH_LONG).show();
+                } else {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this,
+                            "Save Student ID failed", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        return;
+    }
 /*
     "note" : this is a note
     "menu" : [....]
@@ -272,6 +296,7 @@ public class MainActivity extends AppCompatActivity {
     public void submit(View view){
         progressDialog.setTitle("Loading....");
         progressDialog.show();
+
         String text = editText.getText().toString();
 /*
     demonstrates how to use SharedPreferences editor to store values
@@ -290,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
         orderData.put("note", text);
         orderData.put("menu", array);
         Utils.writeFile(this, "history.txt", orderData.toString() + "\n");
-        
+
         ParseObject orderObject = new ParseObject("Order");
         orderObject.put("note", text);
 /*
