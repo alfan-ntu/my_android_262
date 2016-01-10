@@ -39,7 +39,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hide"
+        android:text="hide image"
         android:id="@+id/hideCheckBox"
         android:checked="false"
         android:layout_below="@+id/inputText"
@@ -78,8 +78,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/photo"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
+        android:src="@mipmap/ic_launcher"
+        android:layout_below="@+id/storeInfoSpinner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="89dp" />
 
 </RelativeLayout>

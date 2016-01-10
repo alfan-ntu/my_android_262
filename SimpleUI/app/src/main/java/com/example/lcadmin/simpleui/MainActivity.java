@@ -121,6 +121,10 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 editor.putBoolean("hideCheckBox", isChecked);
                 editor.commit();
+                if(isChecked)
+                    photoImageView.setVisibility(View.GONE);
+                else
+                    photoImageView.setVisibility(View.VISIBLE);
             }
         });
         hideCheckBox.setChecked(sharedPreferences.getBoolean("hideCheckBox", false));
@@ -212,7 +216,6 @@ public class MainActivity extends AppCompatActivity {
                     ParseObject object = objects.get(i);
                     String note = object.getString("note");
                     String storeInfo = object.getString("storeInfo");
-
                     JSONArray array = object.getJSONArray("menu");
 /*
  extract order details from JSONArray array and store it to a JSONObject
@@ -240,14 +243,7 @@ public class MainActivity extends AppCompatActivity {
                             e1.printStackTrace();
                         }
                         totalQuantity += orderQuantity;
-
-                        Log.d("SimpleUI-drink", drinkName);
-                        Log.d("SimpleUI-lQ", String.valueOf(lQuantity));
-                        Log.d("SimpleUI-mQ", String.valueOf(mQuantity));
-                        Log.d("SimpleUI-sQ", String.valueOf(sQuantity)+"\n");
                     }
-
-                    Log.d("SimpleUI-totQ", String.valueOf(totalQuantity));
 
                     Map<String, String> item = new HashMap<String, String>();
 
@@ -294,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
         orderData.put("note", text);
         orderData.put("menu", array);
         Utils.writeFile(this, "history.txt", orderData.toString() + "\n");
-
+        
         ParseObject orderObject = new ParseObject("Order");
         orderObject.put("note", text);
 /*
