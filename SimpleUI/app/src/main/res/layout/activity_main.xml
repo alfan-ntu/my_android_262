@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:text="submit"
         android:id="@+id/button"
-        android:onClick="submit"
+        android:onClick="studentIDsubmit"
         android:layout_alignEnd="@+id/storeInfoSpinner"
         android:layout_alignRight="@+id/storeInfoSpinner"
         android:layout_alignTop="@+id/hideCheckBox"

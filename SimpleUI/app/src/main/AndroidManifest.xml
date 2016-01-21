@@ -16,10 +16,10 @@
         android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.parse.APPLICATION_ID"
-            android:value="mzOU0losuCYejoHkk6yMYBqKtkiMoTfyIs3GS9bp" />
+            android:value="r17eH9ID0abjiq6Cd4fp6v038YhW6s7PzQhBMHEg" />
         <meta-data
             android:name="com.parse.CLIENT_KEY"
-            android:value="jSSanTxAG1bDnXKw0ii81dZDQl2VXRYdVbV7tPfl" />
+            android:value="7zuwuiadXp7iNPDrLTwG72FtZsFtRm8XmVAF6ula" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCkEiHHLKXtAi0tWGhaUgs6ve_igEsOweY" />
